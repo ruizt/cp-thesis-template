@@ -1,67 +1,33 @@
-\documentclass[12pt]{ucthesis}
-\usepackage{amsmath,amsfonts,amssymb,amsthm,color,graphicx,hyperref,cleveref,url,setspace,algorithm,algorithmic,bm,bbm,wrapfig,titlesec,float,ifthen,listings,setspace}
+\documentclass{cpthesis}
+
+% Math, graphics, and reference utilities. Add or remove as your thesis
+% requires; the cpthesis class itself does not depend on any of these.
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{url}
 \usepackage[round,authoryear]{natbib}
 \usepackage[title]{appendix}
 \usepackage[all]{nowidow}
-\usepackage[letterpaper]{geometry}
-\geometry{
-    verbose,
-    nohead,
-    tmargin=1in,
-    bmargin=1in,
-    lmargin=1.5in,
-    rmargin=1in
-}
-\setlength{\parindent}{0.25in} \setlength{\parskip}{6pt}
+
 \hypersetup{linkbordercolor={1 1 1}}
-
-% sectioning
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{2} 
-
-% equation numbering
-\numberwithin{equation}{chapter}
-
-% cp requirement: footnote spacing
-\newlength{\myfootnotesep}
-\setlength{\myfootnotesep}{\baselineskip}
-\addtolength{\myfootnotesep}{-\footnotesep}
-\setlength{\footnotesep}{\myfootnotesep}
-
-% cp requirement: titles should be same font size as body
-\titleformat{\chapter}[display]
-        {\normalfont\normalsize\centering}
-        {\ifthenelse{\equal{\thechapter}{A}}{APPENDICES\\[4.3ex]}{}\chaptertitlename\ \thechapter}
-        {0pt}{\normalsize\uppercase}
-\titlespacing*{\chapter}{0pt}{-20pt}{4.3ex plus .2ex}
-\titleformat*{\section}{\normalsize\bfseries}
-\titleformat*{\subsection}{\small\bfseries}
-\titleformat*{\subsubsection}{\small\bfseries}
-\titleformat*{\paragraph}{\small\bfseries}
-\titleformat*{\subparagraph}{\small\bfseries}
-
-% for adding keywords to abstract
-\providecommand{\keywords}[1]{\textbf{\textit{Keywords:}} #1}
 
 % ------------------------------------------------------------------------------
 
 \begin{document}
 
-% info for title, copyright, and committee pages
+% Front-matter declarations.
 \title{What, me worry?}
 \author{Alfred E. Neuman}
-\degreemonth{June} 
-\degreeyear{2026} 
 \degree{Master of Science}
-\defensemonth{June} 
-\defenseyear{2026}
-\numberofmembers{3}
-   \chair{Prof. 1 \linebreak Assistant Professor of Statistics}
-   \othermemberA{Prof. 2 \linebreak Professor of Statistics} 
-   \othermemberB{Prof. 3 \linebreak Associate Professor of Something Else}
-\field{Statistics} 
+\program{Statistics}
+\graduationmonth{June}
+\graduationyear{2026}
 \campus{San Luis Obispo}
-\copyrightyears{seven}
+\committeechair{Prof. 1 \linebreak Assistant Professor of Statistics}
+\committeemember{Prof. 2 \linebreak Professor of Statistics}
+\committeemember{Prof. 3 \linebreak Associate Professor of Something Else}
 
 % TITLE PAGE
 \maketitle
@@ -83,9 +49,7 @@
 \tableofcontents
 \listoftables
 \listoffigures
-\addtocontents{toc}{%
-   \noindent CHAPTERS
-}
+\tocsubheading{CHAPTERS}
 
 \end{frontmatter}
 
@@ -107,7 +71,7 @@ For an \textit{unnumbered} equation line, use \verb!equation*!:
 \begin{equation*}
     Y = X\beta + \epsilon
 \end{equation*}
-A general rule of thumb is to only number those lines that you cross-reference internally in the document. Note the addition of \verb!\label{...}! above; this allows for an internal cross reference to Equation \ref{eqn-lm}. In this document, equations are numbered consecutively by chapter; note the command \verb!\numberwithin{equation}{chapter}! in the preamble. This is adjustable if you so wish, but unless you have a \textbf{lot} of numbered equations, I wouldn't recommend numbering within sections, and unless you have \textbf{very few} numbered equations, I wouldn't recommend simple consecutive numbers.
+A general rule of thumb is to only number those lines that you cross-reference internally in the document. Note the addition of \verb!\label{...}! above; this allows for an internal cross reference to Equation \ref{eqn-lm}. In this document, equations are numbered consecutively by chapter (the cpthesis class sets this up automatically). This is adjustable if you so wish, but unless you have a \textbf{lot} of numbered equations, I wouldn't recommend numbering within sections, and unless you have \textbf{very few} numbered equations, I wouldn't recommend simple consecutive numbers.
 
 To show a calculation spread over a few lines (or otherwise display a block of two or more equation lines), use the \verb!align*! environment:
 \begin{align*}
@@ -119,7 +83,7 @@ It's fairly unusual that you would want to number each line in a derivation, but
     \label{eqn-lm1}
     y_i &= \beta_0 + x_i^T\beta + \epsilon_i  \\
     \label{eqn-lm2}
-    &= \beta_0 + \sum_{j = 1}^p x_{ij}\beta_j + \epsilon_i 
+    &= \beta_0 + \sum_{j = 1}^p x_{ij}\beta_j + \epsilon_i
 \end{align}
 Then, we can refer to Equations \ref{eqn-lm1}-\ref{eqn-lm2} later in the document using the appropriate reference keys.
 
@@ -148,8 +112,8 @@ Tables are constructed directly in \LaTeX. For example:
     \caption{Some summary statistics.}
     \begin{tabular}{c|cc}
         Site & Size & Volume \\\hline
-        019 & 1014.30 & 1305.08 \\ 
-        030 & 918.19 & 1041.10 \\ 
+        019 & 1014.30 & 1305.08 \\
+        030 & 918.19 & 1041.10 \\
         040 & 664.41 & 640.17
     \end{tabular}
     \label{tab:my_label}
@@ -180,12 +144,8 @@ The two citation types have a uniform appearance across reference entries that i
 \bibliography{refs}
 \bibliographystyle{abbrvnat}
 
-\makeatletter
-\addtocontents{toc}{\let\protect\l@chapter\protect\l@section}
-\makeatother
-\addtocontents{toc}{%
-   \noindent APPENDICES
-}
+\appendixtocformat
+\tocsubheading{APPENDICES}
 \newpage
 \begin{appendices}
 \chapter{FIRST APPENDIX}
