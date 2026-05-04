@@ -1,67 +1,31 @@
-\documentclass[12pt]{ucthesis}
-\usepackage{amsmath,amsfonts,amssymb,amsthm,color,graphicx,hyperref,cleveref,url,setspace,algorithm,algorithmic,bm,bbm,wrapfig,titlesec,float,ifthen,listings,setspace}
+\documentclass{cpthesis}
+
+% Math, graphics, and reference utilities. Add or remove as your thesis
+% requires; the cpthesis class itself does not depend on any of these.
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{url}
 \usepackage[round,authoryear]{natbib}
 \usepackage[title]{appendix}
 \usepackage[all]{nowidow}
-\usepackage[letterpaper]{geometry}
-\geometry{
-    verbose,
-    nohead,
-    tmargin=1in,
-    bmargin=1in,
-    lmargin=1.5in,
-    rmargin=1in
-}
-\setlength{\parindent}{0.25in} \setlength{\parskip}{6pt}
-\hypersetup{linkbordercolor={1 1 1}}
-
-% sectioning
-\setcounter{secnumdepth}{3}
-\setcounter{tocdepth}{2} 
-
-% equation numbering
-\numberwithin{equation}{chapter}
-
-% cp requirement: footnote spacing
-\newlength{\myfootnotesep}
-\setlength{\myfootnotesep}{\baselineskip}
-\addtolength{\myfootnotesep}{-\footnotesep}
-\setlength{\footnotesep}{\myfootnotesep}
-
-% cp requirement: titles should be same font size as body
-\titleformat{\chapter}[display]
-        {\normalfont\normalsize\centering}
-        {\ifthenelse{\equal{\thechapter}{A}}{APPENDICES\\[4.3ex]}{}\chaptertitlename\ \thechapter}
-        {0pt}{\normalsize\uppercase}
-\titlespacing*{\chapter}{0pt}{-20pt}{4.3ex plus .2ex}
-\titleformat*{\section}{\normalsize\bfseries}
-\titleformat*{\subsection}{\small\bfseries}
-\titleformat*{\subsubsection}{\small\bfseries}
-\titleformat*{\paragraph}{\small\bfseries}
-\titleformat*{\subparagraph}{\small\bfseries}
-
-% for adding keywords to abstract
-\providecommand{\keywords}[1]{\textbf{\textit{Keywords:}} #1}
 
 % ------------------------------------------------------------------------------
 
 \begin{document}
 
-% info for title, copyright, and committee pages
-\title{What, me worry?}
+% Front-matter declarations.
+\title{What, Me Worry? A Statistical Investigation of Studied Imperturbability}
 \author{Alfred E. Neuman}
-\degreemonth{June} 
-\degreeyear{2026} 
 \degree{Master of Science}
-\defensemonth{June} 
-\defenseyear{2026}
-\numberofmembers{3}
-   \chair{Prof. 1 \linebreak Assistant Professor of Statistics}
-   \othermemberA{Prof. 2 \linebreak Professor of Statistics} 
-   \othermemberB{Prof. 3 \linebreak Associate Professor of Something Else}
-\field{Statistics} 
+\program{Statistics}
+\graduationmonth{June}
+\graduationyear{2026}
 \campus{San Luis Obispo}
-\copyrightyears{seven}
+\committeechair{Prof. 1 \linebreak Assistant Professor of Statistics}
+\committeemember{Prof. 2 \linebreak Professor of Statistics}
+\committeemember{Prof. 3 \linebreak Associate Professor of Something Else}
 
 % TITLE PAGE
 \maketitle
@@ -72,107 +36,195 @@
 \committeemembershippage
 
 \begin{abstract}
+This thesis examines whether the rhetorical question ``What, me worry?''
+admits a defensible statistical answer. We assemble a 70-year archive of
+537 worry-eliciting incidents reported by a freckle-faced informant of
+approximately eleven years of age, who has remained approximately eleven
+years of age throughout the study window---a finding noteworthy in its
+own right. Using a heteroskedastic-robust ordinal regression, we test
+the null hypothesis of indifference against alternatives ranging from
+mild concern to full-blown agitation. The data are consistent with the
+null at every conventional significance level and at several
+unconventional ones besides. We discuss implications for graduate
+education, dental insurance, and the cover price of the modal periodical
+in our sample (currently 25\textcent, ``cheap'').
 
-\keywords{keyword 1, keyword 2}
+\keywords{indifference, imperturbability, fold-in, gleek, potrzebie}
 \end{abstract}
 
 \begin{acknowledgements}
-
+I would like to thank my committee, who very kindly did not ask whether
+the regression assumptions held; my advisor, who maintained admirable
+composure when I missed thirty-two consecutive milestone deadlines and
+showed up to the defense in a checkered jacket; the editorial staff of
+\textit{MAD} magazine, whose seventy years of continuous public-service
+satire constitute the world's longest-running peer-review process; the
+gentlemen Spy and Spy, for methodological inspiration; my faithful
+typewriter, recently retired; and my mother, who told me to stop reading
+comic books and finish the thesis. I am also grateful to the makers of
+correction fluid.
 \end{acknowledgements}
 
 \tableofcontents
 \listoftables
 \listoffigures
-\addtocontents{toc}{%
-   \noindent CHAPTERS
-}
+\tocsubheading{CHAPTER}
 
 \end{frontmatter}
 
 % BODY
 \pagestyle{plain}
-\chapter{USING THIS TEMPLATE}
+\chapter{INTRODUCTION}\label{ch-intro}
 
-This template satisfies the Grad Ed M.S. Thesis formatting requirements (the 2022-2023 guidelines, anyway, which are the most recent as of this writing in 2025). You should still consult with the thesis editing office on your draft as you are nearing graduation to ensure that added material conforms to current requirements. Before that final step, you will want to update the front matter, but should not need to modify the preamble (the section of the document above the \verb!\begin{document}! line) unless typesetting your thesis requires additional packages (\textit{e.g.}, algorithms, theorem environments, table customization, tikz graphics, etc.). For the most part, drafting within this template should be fairly plug-and-play: you just need to write up the thesis chapters and add them to the document with appropriate chapter headers. Chapter titles do not need to be capitalized, as is shown in this document, but you should use a consistent formatting style.
+A persistent feature of post-war American culture is a buck-toothed
+boy with a gap-toothed grin, ratty red hair, and a remarkable
+tolerance for adverse outcomes \citep{reidelbach1991completely}. He
+has been observed in essentially the same condition since 1956
+\citep{neuman1956what}---neither aging, enrolling in college, nor
+filing tax returns---yet his catchphrase, ``What, me worry?'',
+continues to attract empirical scrutiny. The present thesis
+investigates whether the catchphrase is descriptive (in the sense of
+an observed behavioral disposition) or prescriptive (in the sense of
+an unfalsifiable doctrine), and concludes, after some equivocation,
+that it is both.
 
-The material below provides some helpful information and tips on using LaTeX/BibTex/Overleaf. Note that it exemplifies the use of sectioning, which you may wish to use to structure your chapters. There are three sectioning depths: \verb!\section{...}!, \verb!\subsection{...}!, and \verb!\subsubsection{...}!. If you find yourself in need of more than three levels of subsectioning, you might want to rethink your use of headers. Sections should delineate the contents of each chapter. The document preamble specifies that only two depths appear in the table of contents, but all three are numbered. If you wish to have an unnumbered section, you can add an asterisk, \textit{e.g.}, \verb!\subsection*{}!; however, I would recommend avoiding unnumbered sections. If you need subheaders, you can change the document preamble so that the numbering depth stops at 2 and then use \verb!\subsubsection{}! for this purpose, but again, I would recommend against this. You can label sections for internal cross-references using a key like so: the next section is Section \ref{sect-math}. Don't cross-reference unnumbered sections.
+We adopt the convention that worry $W$ is a non-negative random
+variable with finite second moment, and we assume throughout the
+existence of a baseline worry rate $\lambda_0$ above which graduate
+students are observed to switch programs, abandon committees, or
+develop a sudden interest in artisanal sourdough. Subjects below
+$\lambda_0$ are said to be \textit{imperturbable}; the open question
+is whether imperturbability is a constant of nature or merely a
+slowly-mixing Markov chain.
 
-\section{Math}\label{sect-math}
+The remainder of the document is organized as follows. Chapter
+\ref{ch-methods} describes the data and the model. Chapter
+\ref{ch-results} reports descriptive statistics and the associated
+hypothesis tests. Chapter \ref{ch-discussion} concludes with policy
+recommendations of dubious actionability. Two appendices supply the
+glossary and a sample instrument.
 
-For inline equations, use a single \verb!$! as a delimeter for the math expression, \textit{e.g.}, $Y = X\beta + \epsilon$. To display an equation line, use the \verb!equation! environment. For a numbered equation line, use \verb!equation!:
-\begin{equation}\label{eqn-lm}
-    Y = X\beta + \epsilon
+\chapter{METHODS}\label{ch-methods}
+
+\section{Sample}
+
+We assemble $N = 537$ worry-eliciting incidents drawn from a
+seventy-year archive of letters, news clippings, dental records, and
+unpaid parking tickets, all attributed to or addressed to a single
+informant referred to throughout as A.E.N. The informant declined to
+date his responses, so the temporal ordering of the data is regarded
+as exchangeable in the de Finetti sense.
+
+Inclusion criteria were lenient. To be classified as a worry-eliciting
+incident, an event needed only to (a) admit a worry-relevant response
+in principle and (b) be witnessed in some form by the informant. The
+2007 \textit{MAD} marginalia of \citet{aragones2007marginal} were
+treated as supplementary material rather than primary data, on the
+grounds that anything Sergio Aragon\'es draws in the margin tends to
+resist coding.
+
+\section{Model}
+
+Let $w_i$ denote the worry score reported in incident $i$, scored on a
+five-point ordinal scale from $0$ (``gleek'') to $4$ (``I should be so
+lucky''). We model
+\begin{equation}\label{eq-worry-model}
+    w_i = \beta_0 + x_i^\top\beta + \epsilon_i,
+    \qquad
+    \epsilon_i \stackrel{\text{iid}}{\sim} \mathcal{F}\!\left(0, \sigma^2\right),
 \end{equation}
-For an \textit{unnumbered} equation line, use \verb!equation*!:
-\begin{equation*}
-    Y = X\beta + \epsilon
-\end{equation*}
-A general rule of thumb is to only number those lines that you cross-reference internally in the document. Note the addition of \verb!\label{...}! above; this allows for an internal cross reference to Equation \ref{eqn-lm}. In this document, equations are numbered consecutively by chapter; note the command \verb!\numberwithin{equation}{chapter}! in the preamble. This is adjustable if you so wish, but unless you have a \textbf{lot} of numbered equations, I wouldn't recommend numbering within sections, and unless you have \textbf{very few} numbered equations, I wouldn't recommend simple consecutive numbers.
+where $x_i$ encodes the type and severity of the provocation and
+$\mathcal{F}$ is the as-yet-unspecified disturbance distribution.
+Under the null hypothesis $\beta = \mathbf{0}$, the response degenerates
+to the constant ``What, me worry?'', which conveniently justifies a
+heteroskedastic-robust variance estimator on the grounds that there is
+no heteroskedasticity left to estimate.
 
-To show a calculation spread over a few lines (or otherwise display a block of two or more equation lines), use the \verb!align*! environment:
-\begin{align*}
-    y_i &= \beta_0 + x_i^T\beta + \epsilon_i \\
-    &= \beta_0 + \sum_{j = 1}^p x_{ij}\beta_j + \epsilon_i
-\end{align*}
-It's fairly unusual that you would want to number each line in a derivation, but it's possible by removing the asterisk; in that case, you can add labels for each line.
-\begin{align}
-    \label{eqn-lm1}
-    y_i &= \beta_0 + x_i^T\beta + \epsilon_i  \\
-    \label{eqn-lm2}
-    &= \beta_0 + \sum_{j = 1}^p x_{ij}\beta_j + \epsilon_i 
-\end{align}
-Then, we can refer to Equations \ref{eqn-lm1}-\ref{eqn-lm2} later in the document using the appropriate reference keys.
+\section{Inference}
 
-For further reference, \citet{latex-math} has a helpful guide to mathematical expressions. One small tip: use scalable delimiters in math expressions. It's a small detail, but makes a big difference in the overall appearance of your work. Compare the following:
+We assess statistical significance against $\alpha = 0.27$, chosen as
+the customary nominal level (0.05) plus the cover price of the modal
+periodical in the sample, expressed as a fraction of one dollar
+(\$0.25, ``cheap''), minus a small finite-sample correction (\$0.03).
+Departures from this convention should be reported in the appendix.
 
-\begin{equation*}
-    \eta_i = g^{-1}(\sum_{j = 1}^p x_{ij}\beta_j)
-    \quad\text{vs.}\quad
-    \eta_i = g^{-1}\left(\sum_{j = 1}^p x_{ij}\beta_j\right)
-\end{equation*}
+\chapter{RESULTS}\label{ch-results}
 
-\section{Figures and tables}
+Figure \ref{fig-worry-dist} displays the empirical distribution of
+self-reported worry across the sample, which is approximately normal
+with a mean uncomfortably close to zero. Table \ref{tab-incidents}
+reports counts by provocation type and the modal verbal response
+within each.
 
-Notice that in this project, there is an \verb!img/! directory. You can upload image files there (or anywhere else in your project directory), and input them as figures in the document as follows:
 \begin{figure}[h!]
     \centering
     \includegraphics[width=0.5\linewidth]{img/normal-dist.png}
-    \caption{The normal distribution.}
-    \label{fig:normaldist}
+    \caption{Empirical distribution of self-reported worry scores
+             across $N = 537$ incidents. The fitted curve is
+             suspiciously well-behaved.}
+    \label{fig-worry-dist}
 \end{figure}
-Figure captions should appear below the figure.
 
-Tables are constructed directly in \LaTeX. For example:
 \begin{table}[h!]
     \centering
-    \caption{Some summary statistics.}
-    \begin{tabular}{c|cc}
-        Site & Size & Volume \\\hline
-        019 & 1014.30 & 1305.08 \\ 
-        030 & 918.19 & 1041.10 \\ 
-        040 & 664.41 & 640.17
+    \caption{Worry incidents by provocation type, 1956--present.}
+    \label{tab-incidents}
+    \begin{tabular}{l|cr}
+        Provocation               & Count & Modal response       \\\hline
+        Adverse weather           & 134   & ``What, me worry?''  \\
+        Tax audit                 &  46   & ``Why worry?''       \\
+        End of fiscal quarter     &  88   & ``Eh, who cares?''   \\
+        Geopolitical crisis       &  72   & ``Potrzebie!''       \\
+        Misplaced retainer        & 197   & (no response)        \\
     \end{tabular}
-    \label{tab:my_label}
 \end{table}
-Table captions should appear above the table. There are many nuances to table layouts and alignments. For more information, see \citet{latex-tables} or one of the various Overleaf guides on the subject. The \verb!xtable! package in R \citep{xtable} can be used to convert data frames and tables to latex tables; in conjuntion with \verb!clipr!, this can really streamline table generation.
 
-\section{Citations}
+In every category the modal response is consistent with the null
+hypothesis of indifference. The single observed deviation (incident
+1972-Q3, ``misplaced retainer found in pocket of seldom-worn jacket'')
+was retained in the analysis but, on reflection, attributed to a
+typesetter's error.
 
-The file \verb!refs.bib! contains some example references in BibTex format. I tried to capture the most commonly used entry types: articles, books, book chapters, R packages, and web resources. For academic literature, Google scholar will generate these entries for you, although you should review for consistent formatting (capitalization of journal titles, missing authors, extraneous information, etc.) before inputting into your \verb!.bib! file. Each entry has a key that you can use to cite the entry; by default, only cited entries will appear in the bibliography generated at the end. If you wish to customize the appearance of the bibliography, you can select from among several styles and fine-tune options to suit your preferences. See \citet{bibtex} or Overleaf guides for further information.
+We tested the joint null $\beta = \mathbf{0}$ against the omnibus
+alternative using a permutation test with $10^4$ resamples. The
+observed test statistic was $T = 0.31$; the corresponding $p$-value
+was $0.84$, far in excess of $\alpha = 0.27$. The data are consistent
+with imperturbability.
 
-Textual citations use the \verb!\citet! command and are useful for referring explicitly to a reference in a sentence. For example: \citet{bibtex} provides a helpful guide to reference management using BibTeX.
+\chapter{DISCUSSION}\label{ch-discussion}
 
-Parenthetical citations use the \verb!\citep! command and are more often used in academic writing. For example: stability selection is a general method of variable selection that provides theoretical guarantees on the expected number of false discoveries under mild assumptions \citep{meinshausen2010stability}. A list of citations can be provided by separating the bibtex keys by commas. For example: envelope methods improve estimation efficiency in statistical models by leveraging low-dimensional structure in multivariate data salient to a relationship of interest \citep{cook2010envelope, cook2013envelopes, cook2015foundations}.
+The evidence assembled here is consistent with the operating
+hypothesis that ``What, me worry?'' remains the appropriate single-line
+summary of a wide variety of stochastic provocations. We draw three
+conclusions.
 
-The two citation types have a uniform appearance across reference entries that is controlled by the options specified for the \verb!natbib! package. For a quick guide to customizing citation appearances, see the document by \citet{natbib-guide} (check the URL in the bibliography entry).
+First, the worry distribution exhibits no detectable temporal trend
+across seven decades, which is remarkable given that the underlying
+informant has remained approximately eleven years old throughout the
+study window. We refer the interested reader to
+\citet{kitchen2009art} for a discussion of how this might be possible
+without invoking nonstandard physics.
 
-\chapter{INTRODUCTION}
+Second, the model fitted in Equation~\ref{eq-worry-model} suggests
+that worry is essentially a fixed cost rather than a marginal one:
+doubling the provocation does not double the worry. This finding may
+be of practical interest to tax practitioners, divorce attorneys, and
+faculty mentors of graduate students approaching candidacy
+examinations.
 
-\chapter{METHODS}
+Third, the practical recommendation of this thesis is that the reader
+should not worry. The reader should also pay 25\textcent\ for the
+next issue, which remains ``cheap.''
 
-\chapter{RESULTS}
-
-\chapter{DISCUSSION}
+We close with two limitations. The present study did not have access
+to the gummed-down half of the periodical (the fold-in at the back
+cover), and consequently roughly half of the available signal escaped
+our coding scheme entirely. Future work might use a careful unfolding
+procedure to recover the suppressed measurements, though we caution
+that such procedures are typically destructive of the instrument. A
+second limitation is that the cross-sectional dependence between
+worry and the urgency with which one's typesetter requests the
+manuscript was not modeled. We leave this for a sequel.
 
 \newpage
 \phantomsection
@@ -180,17 +232,68 @@ The two citation types have a uniform appearance across reference entries that i
 \bibliography{refs}
 \bibliographystyle{abbrvnat}
 
-\makeatletter
-\addtocontents{toc}{\let\protect\l@chapter\protect\l@section}
-\makeatother
-\addtocontents{toc}{%
-   \noindent APPENDICES
-}
+\appendixtocformat
+\tocsubheading{APPENDICES}
 \newpage
 \begin{appendices}
-\chapter{FIRST APPENDIX}
 
-\chapter{SECOND APPENDIX}
+\chapter{GLOSSARY OF TERMS}
+
+The following terms appear in the thesis and may be unfamiliar to
+readers who came to graduate school by an unusually direct route.
+
+\begin{description}
+    \item[Cheap] An adjective applied unironically to the cover price
+        of the modal periodical in our sample. See also: ``25\textcent''.
+    \item[Fold-in] A measurement instrument printed across the inside
+        back cover of the periodical, designed such that the
+        instrument's true value is revealed only by destroying the
+        magazine. Compare: latent variable.
+    \item[Gleek] The lowest valid response on the worry ordinal scale.
+        Onomatopoeic; pronounced as written.
+    \item[Imperturbable] An informant whose worry rate is at or below
+        the baseline $\lambda_0$. Operationally: an informant who
+        responds to all provocations with a one-word interrogative.
+    \item[Marginalia] Drawings in the margin of the page, typically by
+        \citet{aragones2007marginal}, which were excluded from
+        analysis on the grounds of being uncodable. See \S2.1.
+    \item[Potrzebie] A term of unspecified meaning whose use is, by
+        convention, sufficient to terminate further discussion of
+        any topic.
+    \item[Spy and Spy] Two anonymous informants, identifiable only by
+        the colors of their hats, whose methodological contributions
+        to the literature were entirely unintended.
+\end{description}
+
+\chapter{SAMPLE WORRY INSTRUMENT}
+
+The instrument below was administered to the informant at irregular
+intervals from 1956 through the present. Subjects were instructed to
+select exactly one response per item.
+
+\begin{enumerate}
+    \item Your dentist has scheduled an emergency appointment.
+        \begin{itemize}
+            \item[$\square$] What, me worry?
+            \item[$\square$] Why worry?
+            \item[$\square$] (other; specify)
+        \end{itemize}
+    \item A foreign power has unveiled a new weapons system.
+        \begin{itemize}
+            \item[$\square$] What, me worry?
+            \item[$\square$] Eh, who cares?
+            \item[$\square$] Potrzebie.
+        \end{itemize}
+    \item Your thesis committee has requested a third revision.
+        \begin{itemize}
+            \item[$\square$] What, me worry?
+            \item[$\square$] (decline to respond)
+            \item[$\square$] (no response on file)
+        \end{itemize}
+\end{enumerate}
+
+A copy of the instrument with all 537 administered items is available
+from the author upon request, postage prepaid.
 
 \end{appendices}
 
