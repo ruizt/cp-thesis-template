@@ -129,6 +129,33 @@ short and commented; everything is in one place.
   you can change `\bibliographystyle` freely without touching the
   class.
 
+## Drafting tips
+
+A few things that aren't obvious from the LaTeX source alone:
+
+- **Captions.** Figure captions go *below* the figure; table captions
+  go *above* the table. The example in `main.tex` shows both.
+- **Equation numbering.** Equations are numbered by chapter
+  automatically (1.1, 1.2, …, 2.1, …). Number only those equations you
+  actually cross-reference, and reach for `equation*` for the rest.
+- **Sectioning depth.** The class numbers `\section` /
+  `\subsection` / `\subsubsection` (depth 3) but lists only the first
+  two in the table of contents. Avoid unnumbered starred sections if
+  you intend to cross-reference them.
+- **Tables from R.** `xtable::xtable(df)` writes a LaTeX `tabular` for
+  any data frame; combined with the `clipr` package it makes table
+  generation painless. Inspect the output before pasting—`xtable`
+  emits a complete `tabular` block, but you usually want only the
+  rows.
+- **BibTeX entries.** `refs.bib` contains worked examples of the
+  common entry types (article, book, incollection, Manual, misc).
+  Google Scholar will generate entries automatically; review them for
+  consistent capitalization and missing fields before committing.
+- **Final pass.** Always run a final draft past the Cal Poly thesis
+  editor before submission. The Grad Ed Office revises the
+  formatting requirements periodically and a template that passed
+  last year may need small tweaks this year.
+
 ## History and attribution
 
 Earlier versions of this repository used a Cal Poly–patched copy of
